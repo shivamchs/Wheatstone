@@ -474,6 +474,52 @@ width: 120px;
       // }
 
 
+
+
+	    if (!document.createTouch && typeof Touch !== 'undefined') {
+    document.createTouch = function (view, target, identifier, pageX, pageY, screenX, screenY, clientX, clientY) {
+        return new Touch({
+            target: target,
+            identifier: identifier,
+            pageX: pageX,
+            pageY: pageY,
+            screenX: screenX,
+            screenY: screenY,
+            clientX: clientX,
+            clientY: clientY
+        });
+    };
+    document.createTouchList = function () {
+        var tl = function() {
+            var touchList = [];    
+            touchList.item = function(index) {
+                return this[index] || null;
+            };
+            touchList.identifiedTouch = function(id) {
+                return this[id + 1] || null;
+            };
+            return touchList;
+        }
+        
+        var touchList = tl();
+        for (var i = 0; i < arguments.length; i++) {
+            touchList[i] = arguments[i];
+        }
+        touchList.length = arguments.length;
+        return touchList;
+    };
+}
+
+
+
+
+
+
+
+
+	    
+
+
       const mydiv = document.getElementById('mydiv');
       var data4 = 1, data3 = 1;
 
