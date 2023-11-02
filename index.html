@@ -482,42 +482,34 @@ width: 120px;
 
 
 
-	    if (!document.createTouch && typeof Touch !== 'undefined') {
-    document.createTouch = function (view, target, identifier, pageX, pageY, screenX, screenY, clientX, clientY) {
-        return new Touch({
-            target: target,
-            identifier: identifier,
-            pageX: pageX,
-            pageY: pageY,
-            screenX: screenX,
-            screenY: screenY,
-            clientX: clientX,
-            clientY: clientY
-        });
-    };
-    document.createTouchList = function () {
-        var tl = function() {
-            var touchList = [];    
-            touchList.item = function(index) {
-                return this[index] || null;
-            };
-            touchList.identifiedTouch = function(id) {
-                return this[id + 1] || null;
-            };
-            return touchList;
-        }
-        
-        var touchList = tl();
-        for (var i = 0; i < arguments.length; i++) {
-            touchList[i] = arguments[i];
-        }
-        touchList.length = arguments.length;
-        return touchList;
-    };
+	   function touchHandler(event) {
+    var touch = event.changedTouches[0];
+
+    var simulatedEvent = document.createEvent("MouseEvent");
+        simulatedEvent.initMouseEvent({
+        touchstart: "mousedown",
+        touchmove: "mousemove",
+        touchend: "mouseup"
+    }[event.type], true, true, window, 1,
+        touch.screenX, touch.screenY,
+        touch.clientX, touch.clientY, false,
+        false, false, false, 0, null);
+
+    touch.target.dispatchEvent(simulatedEvent);
+    event.preventDefault();
+}
+
+function init() {
+    document.addEventListener("touchstart", touchHandler, true);
+    document.addEventListener("touchmove", touchHandler, true);
+    document.addEventListener("touchend", touchHandler, true);
+    document.addEventListener("touchcancel", touchHandler, true);
 }
 
 
 
+
+      init();
 
 
 
