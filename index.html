@@ -860,7 +860,7 @@ function init() {
         const set_2 = new Set(arr1);
         console.log(arr_r);
         if (Tid.length != 8 || Sid.length != 8 || !setsAreEqual(set_1, set_2) || c_r != 4 || c_v != 1 || c_g != 1) {
-          alert("Wrong Connections");
+          swal("Wrong Connections");
         }
         else {
           var amp = {};
@@ -878,7 +878,7 @@ function init() {
           s_element.add(s);
           const r_pos = [];
           if (s[0] != 'r' || amp[s].length != 3 || amp[s][0] != arr[5]) {
-            alert("Wrong Connection");
+            swal("Wrong Connection");
           }
           else {
 
@@ -899,7 +899,7 @@ function init() {
               s = amp[s][1];
 
             if (s_element.has(s) || s[0] != 'r' || amp[s].length != 2 || amp[s][1] != arr[5])
-              alert("Wrong Connection");
+            swal("Wrong Connection");
             else {
 
               r_top = document.querySelector('#' + s + '').getBoundingClientRect().bottom-p_top;
@@ -909,7 +909,7 @@ function init() {
               s_element.add(s);
               s = amp[arr[0]][1];
               if (s[0] != 'r' || s_element.has(s) || amp[s].length != 3 || amp[s][2] != arr[5])
-                alert("Wrong Connection");
+              swal("Wrong Connection");
               else {
                 s_element.add(s);
                 if (amp[s][0] != arr[0])
@@ -917,7 +917,7 @@ function init() {
                 else
                   s = amp[s][1];
                 if (s[0] != 'r' || s_element.has(s) || amp[s].length != 2 || amp[s][0] != arr[5])
-                  alert("Wrong Connection");
+                swal("Wrong Connection");
                 else {
 
                   r_top = document.querySelector('#' + s + '').getBoundingClientRect().bottom-p_top;
@@ -925,7 +925,7 @@ function init() {
                   r_pos[2] = [r_top, r_left];
 
 
-                  alert("Right Connections...Go Ahead!!");
+                  swal("Right Connections...Go Ahead!!");
                   var q = document.getElementById("data1");
                   q.removeAttribute("disabled")
                   var e = document.getElementById("data5");
@@ -993,8 +993,8 @@ function init() {
                   var div1 = document.getElementById("diagram");
                   var div2 = document.getElementById("toolbox");
 
-                  /*div1.classList.add("no-pointer-events");
-                  div2.classList.add("no-pointer-events");*/
+                  div1.classList.add("no-pointer-events");
+                  div2.classList.add("no-pointer-events");
 
 
 
